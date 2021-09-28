@@ -23,6 +23,23 @@ public:
         }
         return ans;
     }
+    static int sum(const vector<int>& v, int k){
+        int c(0),windowstart(0),maxsum(0),sum(0);
+        for(int windowend = 0;windowend<v.size();windowend++){
+            sum += v[windowend];
+            c++;
+            if(c == k){
+                maxsum = max(maxsum, sum);
+                sum -= v[windowstart];
+                windowstart++;
+                c -= 1;
+
+            }
+        }
+        return maxsum;
+
+
+    }
 
 
 };
@@ -32,6 +49,8 @@ int main(){
     for(auto i: contiguousAnswer){
         cout<<i<<endl;
     }
+    int ans = slidingWindow::sum(vector<int> {1,4,2,5,2,3},3);
+    cout<<"Answer for maximum subarray: "<<ans<<endl;
     return 0;
 
 }
