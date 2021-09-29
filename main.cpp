@@ -41,7 +41,6 @@ public:
                 sum -= v[windowstart];
                 windowstart++;
                 c -= 1;
-
             }
         }
         return maxsum;
