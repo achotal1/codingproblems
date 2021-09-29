@@ -85,6 +85,29 @@ public:
         return count;
 
     }
+    static int fruitbasket(const vector<char>& v)
+    {
+        int windowstart(0);
+        unordered_map<char,int> M;
+        int maxans(0);
+        for(int windowend = 0;windowend< v.size();windowend++)
+        {
+            M[v[windowend]]++;
+
+            while(M.size()> 2)
+            {
+                M[v[windowstart]]--;
+                if(M[v[windowstart]]==0)
+                {
+                    M.erase(v[windowstart]);
+                }
+                windowstart++;
+            }
+            maxans = max(maxans, windowend - windowstart +1);
+        }
+        return maxans;
+
+    }
 };
 int main()
 {
@@ -100,6 +123,8 @@ int main()
     cout<<"Answer of smallest subarray: "<<minAns<<endl;
     int longestsub = slidingWindow::longestsubstring("cbbebi",3);
     cout<<"Answer of long substring: "<<longestsub<<endl;
+    int fruitbask = slidingWindow::fruitbasket(vector<char>{'A','B','A','A','C'});
+    cout<<"Answer of fruitbasket: "<<fruitbask<<endl;
 
     return 0;
 
