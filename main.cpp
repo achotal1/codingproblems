@@ -61,6 +61,30 @@ public:
         }
         return minim;
     }
+    static int longestsubstring(const string& s, int k)
+    {
+        unordered_map<char,int> M;
+        int windowstart(0),count(0);
+        for(int windowend = 0;windowend<s.length(); windowend++)
+        {
+            M[s[windowend]]++;
+            count++;
+            while(M.size()>k){
+                M[s[windowstart]]--;
+                if(M[s[windowstart]]==0)
+                {
+                    M.erase(s[windowstart]);
+                }
+                count--;
+                windowstart++;
+
+            }
+
+
+        }
+        return count;
+
+    }
 };
 int main()
 {
@@ -74,6 +98,8 @@ int main()
     cout<<"Answer for maximum subarray: "<<ans<<endl;
     int minAns = slidingWindow::smallestSubarray(vector<int> {1,3,2,4,3},10);
     cout<<"Answer of smallest subarray: "<<minAns<<endl;
+    int longestsub = slidingWindow::longestsubstring("cbbebi",3);
+    cout<<"Answer of long substring: "<<longestsub<<endl;
 
     return 0;
 
